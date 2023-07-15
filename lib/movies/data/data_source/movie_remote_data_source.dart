@@ -68,4 +68,6 @@ class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
           ServerFailure.fromResponse(e.response!.statusCode, e.response!.data));
     }
   }
+
+  void fold() {}
 }

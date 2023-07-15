@@ -3,13 +3,17 @@ import 'package:movie_app/core/errors/failure.dart';
 import 'package:movie_app/movies/domain/entities/movie.dart';
 import 'package:movie_app/movies/domain/repo/base_movies_repo.dart';
 
-class GetNowPlayingMovie {
+class GetNowPlayingUseCaseMovie {
   BaseMovieRepo baseMovieRepo;
-  GetNowPlayingMovie({
+  GetNowPlayingUseCaseMovie({
     required this.baseMovieRepo,
   });
 
-   Future<Either<ServerFailure, Future<List<Movie>>>> excute() async {
+   Future<Either<ServerFailure, List<Movie>>> excute() async {
     return baseMovieRepo.getNowPlayingMovie();
   }
 }
+
+// class x{
+//   Get
+// }
