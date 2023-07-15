@@ -25,8 +25,7 @@ class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
 
       return Right(responseMovieModel);
     } on DioError catch (e) {
-      debugPrint("my error is ${e.response!.statusCode}");
-      debugPrint("my error is ${e.response!.data}");
+     
       return Left(
           ServerFailure.fromResponse(e.response!.statusCode, e.response!.data));
     }
