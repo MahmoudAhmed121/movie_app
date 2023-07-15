@@ -23,10 +23,11 @@ class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
           .map((dataList) => MovieModel.fromjson(dataList))
           .toList();
 
-      return right(responseMovieModel);
+      return Right(responseMovieModel);
     } on DioError catch (e) {
-      debugPrint("my error is ${e.toString()}");
-      return left(
+      debugPrint("my error is ${e.response!.statusCode}");
+      debugPrint("my error is ${e.response!.data}");
+      return Left(
           ServerFailure.fromResponse(e.response!.statusCode, e.response!.data));
     }
   }
@@ -42,10 +43,10 @@ class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
           .map((dataList) => MovieModel.fromjson(dataList))
           .toList();
 
-      return right(responseMovieModel);
+      return Right(responseMovieModel);
     } on DioError catch (e) {
       debugPrint("my error is ${e.toString()}");
-      return left(
+      return Left(
           ServerFailure.fromResponse(e.response!.statusCode, e.response!.data));
     }
   }
@@ -61,13 +62,13 @@ class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
           .map((dataList) => MovieModel.fromjson(dataList))
           .toList();
 
-      return right(responseMovieModel);
+      return Right(responseMovieModel);
     } on DioError catch (e) {
       debugPrint("my error is ${e.toString()}");
-      return left(
+      return Left(
           ServerFailure.fromResponse(e.response!.statusCode, e.response!.data));
     }
   }
 
-  void fold() {}
+
 }

@@ -1,6 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/movies/data/data_source/movie_remote_data_source.dart';
+import 'package:movie_app/movies/data/repo/movie_repo.dart';
 
-void main() {
+import 'movies/domain/repo/base_movies_repo.dart';
+import 'movies/domain/use_case/get_now_playing_movies.dart';
+
+void main() async {
+  BaseMovieRemoteDataSource baseMovieRemoteDataSource = MovieRemoteDataSource();
+  BaseMovieRepo baseMovieRepo =
+      MovieRepo(basemovieRemoteDataSource: baseMovieRemoteDataSource);
+  final data =
+      await GetNowPlayingUseCaseMovie(baseMovieRepo: baseMovieRepo).excute();
+
   runApp(const MyApp());
 }
 
