@@ -16,7 +16,7 @@ class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
   Future<Either<ServerFailure, List<MovieModel>>> getNowPlayingMovie() async {
     try {
       final response = await Dio().get(
-          "${AppConstant.domain}${AppConstant.nowPlaying}${AppConstant.apiKey}");
+          "${ApiConstant.domain}${ApiConstant.nowPlaying}${ApiConstant.apiKey}");
 
       final List<dynamic> responseDynamic = response.data["results"];
       final List<MovieModel> responseMovieModel = responseDynamic
@@ -35,7 +35,7 @@ class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
   Future<Either<ServerFailure, List<MovieModel>>> getPopulerMovie() async {
     try {
       final response = await Dio().get(
-          "${AppConstant.domain}${AppConstant.popular}${AppConstant.apiKey}");
+          "${ApiConstant.domain}${ApiConstant.popular}${ApiConstant.apiKey}");
 
       final List<dynamic> responseDynamic = response.data["results"];
       final List<MovieModel> responseMovieModel = responseDynamic
@@ -54,7 +54,7 @@ class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
   Future<Either<ServerFailure, List<MovieModel>>> getTopRatingMovie() async {
     try {
       final response = await Dio().get(
-          "${AppConstant.domain}${AppConstant.topRated}${AppConstant.apiKey}");
+          "${ApiConstant.domain}${ApiConstant.topRated}${ApiConstant.apiKey}");
 
       final List<dynamic> responseDynamic = response.data["results"];
       final List<MovieModel> responseMovieModel = responseDynamic
