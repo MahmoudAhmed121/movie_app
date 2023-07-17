@@ -14,6 +14,4 @@ class GetNowPlayingUseCaseMovie {
   }
 }
 
-// class x{
-//   Get
-// }
+
