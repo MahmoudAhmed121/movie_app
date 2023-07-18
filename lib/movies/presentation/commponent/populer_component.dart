@@ -14,7 +14,7 @@ class PopularComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<PopularBloc, PopulerState>(
       listener: (context, state) {
-       print("bloc builder populer");
+     
       },
       builder: (context, state) {
          if(state is PopulerFailure){

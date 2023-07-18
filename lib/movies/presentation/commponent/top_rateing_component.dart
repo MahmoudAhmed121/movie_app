@@ -14,7 +14,7 @@ class TopRatingComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<TopRatingBloc, TopRatingState>(
       listener: (context, state) {
-         print("bloc builder for top rating");
+     
       },
       builder: (context, state) {
         if (state is TopratingFailure) {

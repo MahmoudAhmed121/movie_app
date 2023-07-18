@@ -10,7 +10,7 @@ class GetTopRatingUseCasMovie {
     required this.baseMovieRepo,
   });
 
- Future<Either<ServerFailure, List<Movie>>> excute() async {
+ Future<Either<ServerFailure, List<Movie>>> call() async {
     return baseMovieRepo.getTopRatingMovie();
   }
 }

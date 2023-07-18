@@ -19,7 +19,7 @@ class TopRatingBloc extends Bloc<TopRatingEvent, TopRatingState> {
       GetTopRatingEvent event, Emitter<TopRatingState> emit) async {
     emit(TopratingLoading());
 
-    final result = await getTopRatingUseCasMovie.excute();
+    final result = await getTopRatingUseCasMovie();
 
     result.fold(
       (failure) => emit(TopratingFailure(errorMessage: failure.errMessages)),

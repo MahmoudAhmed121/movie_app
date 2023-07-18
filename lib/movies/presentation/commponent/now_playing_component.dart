@@ -14,9 +14,9 @@ class NowPlayingComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<NowPlayingBloc, NowPlaying>(
-     buildWhen: (previous, current) => previous.x == current.x,
+     
       listener: (context, state) {
-        print("bloc builder now playing");
+    
       },
       builder: (context, state) {
         

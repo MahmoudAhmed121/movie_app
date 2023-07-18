@@ -22,7 +22,7 @@ class NowPlayingBloc extends Bloc<MoviesEvent, NowPlaying> {
   FutureOr<void> _getNowPlayingMovies(GetNowPlayingEvent event, Emitter<NowPlaying> emit) async{
      emit(NowPlayingLoading());
 
-    final result = await getNowPlayingUseCaseMovie.excute();
+    final result = await getNowPlayingUseCaseMovie();
 
     result.fold(
       (failure) => emit(NowPlayingFailure(errorMessage: failure.errMessages)),
