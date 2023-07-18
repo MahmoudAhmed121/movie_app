@@ -5,15 +5,20 @@ import 'package:movie_app/movies/domain/repo/base_movies_repo.dart';
 import 'package:movie_app/movies/domain/use_case/get_now_playing_movies.dart';
 import 'package:movie_app/movies/domain/use_case/get_populer_movies.dart';
 import 'package:movie_app/movies/domain/use_case/get_top_rating_movies.dart';
-import 'package:movie_app/movies/presentation/manager/bloc/movies_bloc.dart';
+import 'package:movie_app/movies/presentation/manager/mow_playing/now_playing_bloc.dart';
+import 'package:movie_app/movies/presentation/manager/populer/populer_bloc.dart';
+import 'package:movie_app/movies/presentation/manager/top_rating/top_rating_bloc.dart';
 
 final getIt = GetIt.instance;
 
 class ServicesLocator {
   void init() {
     // MovieBloc
-    getIt.registerFactory(() => MoviesBloc(getIt(), getIt(), getIt()));
+    getIt.registerFactory(() => NowPlayingBloc(getIt()));
 
+  getIt.registerFactory(() => PopularBloc(getIt()));
+
+  getIt.registerFactory(() => TopRatingBloc(getIt()));
     //use cases NowPlayingUseCaseMovie
     getIt.registerLazySingleton(
         () => GetNowPlayingUseCaseMovie(baseMovieRepo: getIt()));

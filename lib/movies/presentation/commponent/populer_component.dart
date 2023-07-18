@@ -3,27 +3,26 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/core/utils/constant.dart';
-import 'package:movie_app/movies/presentation/manager/bloc/movies_bloc.dart';
+import 'package:movie_app/movies/presentation/manager/populer/populer_bloc.dart';
+import 'package:movie_app/movies/presentation/manager/populer/populer_state.dart';
 import 'package:shimmer/shimmer.dart';
 
-class TopRatingComponent extends StatelessWidget {
-  const TopRatingComponent({super.key});
+class PopularComponent extends StatelessWidget {
+  const PopularComponent({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<MoviesBloc, MoviesState>(
+    return BlocConsumer<PopularBloc, PopulerState>(
       listener: (context, state) {
-       print("my top rated state is $state");
+       print("bloc builder populer");
       },
       builder: (context, state) {
-        if(state is MoviesFailure){
-          return Text(state.errorMessage,style: const TextStyle(fontSize: 40,
+         if(state is PopulerFailure){
+          return Text(state.errMessages,style: const TextStyle(fontSize: 40,
           color: Colors.white
           ),);
         }
-        if(state is MoviesSuccess){
-
-        
+        if(state is PopulerSuccess){
         return FadeIn(
           duration: const Duration(milliseconds: 500),
           child: SizedBox(
@@ -38,7 +37,9 @@ class TopRatingComponent extends StatelessWidget {
                 return Container(
                   padding: const EdgeInsets.only(right: 8.0),
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      /// TODO : NAVIGATE TO  MOVIE DETAILS
+                    },
                     child: ClipRRect(
                       borderRadius:
                           const BorderRadius.all(Radius.circular(8.0)),

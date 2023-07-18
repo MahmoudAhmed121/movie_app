@@ -1,4 +1,6 @@
-part of 'movies_bloc.dart';
+
+import 'package:equatable/equatable.dart';
+
 
 abstract class MoviesEvent extends Equatable {
   const MoviesEvent();
@@ -9,6 +11,4 @@ abstract class MoviesEvent extends Equatable {
 
 class GetNowPlayingEvent extends MoviesEvent {}
 
-class GetPopulerEvent extends MoviesEvent {}
 
-class GetTopRatingEvent extends MoviesEvent {}

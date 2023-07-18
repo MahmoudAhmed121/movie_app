@@ -5,25 +5,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/core/utils/constant.dart';
 
-import 'package:movie_app/movies/presentation/manager/bloc/movies_bloc.dart';
+import 'package:movie_app/movies/presentation/manager/mow_playing/now_playing_bloc.dart';
+import 'package:movie_app/movies/presentation/manager/mow_playing/now_playing_state.dart';
 
 class NowPlayingComponent extends StatelessWidget {
   const NowPlayingComponent({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<MoviesBloc, MoviesState>(
+    return BlocConsumer<NowPlayingBloc, NowPlaying>(
+     buildWhen: (previous, current) => previous.x == current.x,
       listener: (context, state) {
-        print(state);
+        print("bloc builder now playing");
       },
       builder: (context, state) {
-        if (state is MoviesFailure) {
+        
+        if (state is NowPlayingFailure) {
           return Text(
             state.errorMessage,
             style: const TextStyle(fontSize: 40, color: Colors.white),
           );
         }
-        if (state is MoviesSuccess) {
+        if (state is NowPlayingSuccess) {
           return FadeIn(
             duration: const Duration(milliseconds: 500),
             child: CarouselSlider(
