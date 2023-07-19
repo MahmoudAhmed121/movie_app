@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/core/utils/base_use_case.dart';
 import 'package:movie_app/movies/domain/use_case/get_top_rating_movies.dart';
 import 'package:movie_app/movies/presentation/manager/top_rating/top_rating_event.dart';
 import 'package:movie_app/movies/presentation/manager/top_rating/top_rating_state.dart';
@@ -19,7 +20,7 @@ class TopRatingBloc extends Bloc<TopRatingEvent, TopRatingState> {
       GetTopRatingEvent event, Emitter<TopRatingState> emit) async {
     emit(TopratingLoading());
 
-    final result = await getTopRatingUseCasMovie();
+    final result = await getTopRatingUseCasMovie(const NowParametrs());
 
     result.fold(
       (failure) => emit(TopratingFailure(errorMessage: failure.errMessages)),

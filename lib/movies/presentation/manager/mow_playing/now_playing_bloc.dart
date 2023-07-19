@@ -1,6 +1,7 @@
 
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/core/utils/base_use_case.dart';
 import 'package:movie_app/movies/domain/use_case/get_now_playing_movies.dart';
 import 'package:movie_app/movies/presentation/manager/mow_playing/now_playing_event.dart';
 import 'package:movie_app/movies/presentation/manager/mow_playing/now_playing_state.dart';
@@ -22,7 +23,7 @@ class NowPlayingBloc extends Bloc<MoviesEvent, NowPlaying> {
   FutureOr<void> _getNowPlayingMovies(GetNowPlayingEvent event, Emitter<NowPlaying> emit) async{
      emit(NowPlayingLoading());
 
-    final result = await getNowPlayingUseCaseMovie();
+    final result = await getNowPlayingUseCaseMovie(const NowParametrs());
 
     result.fold(
       (failure) => emit(NowPlayingFailure(errorMessage: failure.errMessages)),

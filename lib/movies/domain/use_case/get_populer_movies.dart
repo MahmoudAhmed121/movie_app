@@ -4,14 +4,14 @@ import 'package:movie_app/core/utils/base_use_case.dart';
 import 'package:movie_app/movies/domain/entities/movie.dart';
 import 'package:movie_app/movies/domain/repo/base_movies_repo.dart';
 
-class GetPopulerUseCasMovie extends BaseUseCase<List<Movie>> {
+class GetPopulerUseCasMovie extends BaseUseCase<List<Movie>,NowParametrs> {
   BaseMovieRepo baseMovieRepo;
   GetPopulerUseCasMovie({
     required this.baseMovieRepo,
   });
 
   @override
-  Future<Either<ServerFailure, List<Movie>>> call() async {
+  Future<Either<ServerFailure, List<Movie>>> call(NowParametrs pratemetrs) async {
     return await baseMovieRepo.getPopulerMovie();
   }
 }
