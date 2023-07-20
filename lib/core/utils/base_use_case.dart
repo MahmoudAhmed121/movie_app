@@ -6,13 +6,9 @@ abstract class BaseUseCase<T, Parametrs> {
   Future<Either<ServerFailure, T>> call(Parametrs parametrs);
 }
 
+class NoParametrs extends Equatable {
+  const NoParametrs();
 
-class NowParametrs extends Equatable {
-
-
-
- const NowParametrs();
- 
   @override
   List<Object?> get props => [];
 }

@@ -5,6 +5,8 @@ class ApiConstant {
   static const String popular = "/movie/popular";
   static const String nowPlaying = "/movie/now_playing";
   static const String topRated = "/movie/top_rated";
-
+  static String recommendation(String id) =>
+      "/movie/$id/recommendations$apiKey";
+  static String cast(String id) => "/movie/$id/credits$apiKey";
   static String imageUrl(String path) => "$baseImageUrl$path";
 }

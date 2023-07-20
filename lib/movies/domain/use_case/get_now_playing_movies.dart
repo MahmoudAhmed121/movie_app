@@ -4,14 +4,14 @@ import 'package:movie_app/core/utils/base_use_case.dart';
 import 'package:movie_app/movies/domain/entities/movie.dart';
 import 'package:movie_app/movies/domain/repo/base_movies_repo.dart';
 
-class GetNowPlayingUseCaseMovie extends BaseUseCase<List<Movie>,NowParametrs> {
+class GetNowPlayingUseCaseMovie extends BaseUseCase<List<Movie>,NoParametrs> {
   BaseMovieRepo baseMovieRepo;
   GetNowPlayingUseCaseMovie({
     required this.baseMovieRepo,
   });
 
   @override
-  Future<Either<ServerFailure, List<Movie>>> call(NowParametrs pratemetrs) async {
+  Future<Either<ServerFailure, List<Movie>>> call(NoParametrs parametrs) async {
     return await baseMovieRepo.getNowPlayingMovie();
   }
 }

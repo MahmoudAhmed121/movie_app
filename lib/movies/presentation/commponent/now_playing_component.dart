@@ -4,9 +4,13 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/core/utils/constant.dart';
+import 'package:movie_app/movies/presentation/screen/movie_detail_screen.dart';
 
-import 'package:movie_app/movies/presentation/manager/mow_playing/now_playing_bloc.dart';
-import 'package:movie_app/movies/presentation/manager/mow_playing/now_playing_state.dart';
+
+
+import '../manager/now_playing/now_playing_bloc.dart';
+import '../manager/now_playing/now_playing_state.dart';
+
 
 class NowPlayingComponent extends StatelessWidget {
   const NowPlayingComponent({super.key});
@@ -40,7 +44,7 @@ class NowPlayingComponent extends StatelessWidget {
                   return GestureDetector(
                     key: const Key('openMovieMinimalDetail'),
                     onTap: () {
-                      /// TODO : NAVIGATE TO MOVIE DETAILS
+                   Navigator.push(context, MaterialPageRoute(builder: (context) => MovieDetailScreen(id: item.id),));
                     },
                     child: Stack(
                       children: [
@@ -112,7 +116,7 @@ class NowPlayingComponent extends StatelessWidget {
             ),
           );
         }
-        return const SizedBox(
+        return  const SizedBox(
           height: 400,
           child: Center(
             child: CircularProgressIndicator(),

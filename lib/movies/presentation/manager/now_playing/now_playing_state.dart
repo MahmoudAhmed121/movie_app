@@ -1,11 +1,13 @@
+
 import 'package:equatable/equatable.dart';
+
 import 'package:movie_app/movies/domain/entities/movie.dart';
 
 abstract class NowPlaying extends Equatable {
   const NowPlaying();
-final x = 0;
+
   @override
-  List<Object> get props => [x];
+  List<Object> get props => [];
 }
 
 class NowPlayingInitial extends NowPlaying {}
@@ -21,6 +23,8 @@ class NowPlayingSuccess extends NowPlaying {
 
   @override
   List<Object> get props => [movie];
+
+  
 }
 
 class NowPlayingFailure extends NowPlaying {
@@ -33,3 +37,9 @@ class NowPlayingFailure extends NowPlaying {
   @override
   List<Object> get props => [errorMessage];
 }
+
+
+
+
+
+

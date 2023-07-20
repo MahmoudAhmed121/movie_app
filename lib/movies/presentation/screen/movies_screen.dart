@@ -5,14 +5,12 @@ import 'package:movie_app/movies/presentation/commponent/now_playing_component.d
 import 'package:movie_app/movies/presentation/commponent/populer_component.dart';
 import 'package:movie_app/movies/presentation/commponent/top_rateing_component.dart';
 
-
 class MainMoviesScreen extends StatelessWidget {
   const MainMoviesScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff16122B),
       body: SingleChildScrollView(
         key: const Key('movieScrollView'),
         child: Column(
@@ -33,9 +31,7 @@ class MainMoviesScreen extends StatelessWidget {
                         color: Colors.white),
                   ),
                   InkWell(
-                    onTap: () {
-                      /// TODO : NAVIGATION TO POPULAR SCREEN
-                    },
+                    onTap: () {},
                     child: const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Row(
