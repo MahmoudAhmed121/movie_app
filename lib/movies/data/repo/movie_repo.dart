@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:movie_app/core/errors/failure.dart';
 import 'package:movie_app/movies/data/data_source/movie_remote_data_source.dart';
 import 'package:movie_app/movies/domain/entities/cast.dart';
+import 'package:movie_app/movies/domain/entities/gener_home_page.dart';
 import 'package:movie_app/movies/domain/entities/movie.dart';
 import 'package:movie_app/movies/domain/entities/movie_details.dart';
 import 'package:movie_app/movies/domain/entities/recommendations.dart';
@@ -80,7 +81,17 @@ class MovieRepo extends BaseMovieRepo {
 
       return Right(response);
     } on DioError catch (e) {
-      print(e.response);
+      return Left(ServerFailure.fromDioError(e));
+    }
+  }
+
+  @override
+  Future<Either<ServerFailure, List<GenresHomePage>>>
+      getGenresHomePage() async {
+    try {
+      final response = await basemovieRemoteDataSource.getGenresHomePage();
+      return Right(response.cast<GenresHomePage>());
+    } on DioError catch (e) {
       return Left(ServerFailure.fromDioError(e));
     }
   }
