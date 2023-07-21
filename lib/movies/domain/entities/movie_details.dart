@@ -5,7 +5,7 @@ import 'package:movie_app/movies/domain/entities/genres.dart';
 class MovieDetails extends Equatable {
 
 
-  
+  final String homePage;
   final String overview;
   final String backdropPath;
   final String releaseDate;
@@ -15,8 +15,8 @@ class MovieDetails extends Equatable {
   final int runtime;
   final List<Genres> genres;
 
- const MovieDetails({
-    
+ const MovieDetails( {
+    required this.homePage,
     required this.overview,
     required this.backdropPath,
     required this.releaseDate,

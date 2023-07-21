@@ -4,12 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/core/utils/constant.dart';
 import 'package:movie_app/movies/domain/entities/movie_details.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({super.key, required this.movieDetails});
   final MovieDetails movieDetails;
+
   @override
   Widget build(BuildContext context) {
+    final Uri url = Uri.parse(movieDetails.homePage);
+    final httpsUrl = url.replace(scheme: 'https'); // تحويل الاتصال إلى https
+
     return SliverAppBar(
       leading: IconButton(
           onPressed: () {
@@ -60,10 +65,17 @@ class CustomAppBar extends StatelessWidget {
               );
             },
             blendMode: BlendMode.dstIn,
-            child: CachedNetworkImage(
-              height: 560.0,
-              imageUrl: ApiConstant.imageUrl(movieDetails.backdropPath),
-              fit: BoxFit.cover,
+            child: GestureDetector(
+              onTap: () async {
+                if (await canLaunchUrl(httpsUrl)) {
+                  await launchUrl(httpsUrl);
+                }
+              },
+              child: CachedNetworkImage(
+                height: 560.0,
+                imageUrl: ApiConstant.imageUrl(movieDetails.backdropPath),
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         ),

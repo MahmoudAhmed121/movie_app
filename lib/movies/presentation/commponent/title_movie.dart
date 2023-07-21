@@ -60,7 +60,7 @@ class CustomTiltleMove extends StatelessWidget {
                       Text(
                         '(${movieDetails.voteAverage})',
                         style: const TextStyle(
-                          fontSize: 1.0,
+                          fontSize: 10.0,
                           fontWeight: FontWeight.w500,
                           letterSpacing: 1.2,
                         ),
@@ -92,7 +92,7 @@ class CustomTiltleMove extends StatelessWidget {
               Text(
                 'Genres: ${_showGenres(movieDetails.genres)}',
                 style: const TextStyle(
-                  color: Colors.white70,
+                  color: Colors.red,
                   fontSize: 12.0,
                   fontWeight: FontWeight.w500,
                   letterSpacing: 1.2,

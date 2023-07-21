@@ -3,7 +3,7 @@ import 'package:movie_app/movies/domain/entities/movie_details.dart';
 
 class MovieDetailsModel extends MovieDetails {
   const MovieDetailsModel({
-    
+    required super.homePage,
     required super.overview,
     required super.backdropPath,
     required super.releaseDate,
@@ -16,7 +16,7 @@ class MovieDetailsModel extends MovieDetails {
 
   factory MovieDetailsModel.fromJson(Map<String, dynamic> json) {
     return MovieDetailsModel(
-      
+      homePage: json["homepage"],
       overview: json["overview"],
       backdropPath: json["backdrop_path"],
       releaseDate: json["release_date"],

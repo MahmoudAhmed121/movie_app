@@ -90,7 +90,7 @@ class MainMoviesScreen extends StatelessWidget {
               ),
             ),
             const TopRatingComponent(),
-            const SizedBox(height: 50.0),
+            const SizedBox(height: 25.0),
           ],
         ),
       ),

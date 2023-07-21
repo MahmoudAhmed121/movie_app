@@ -43,6 +43,7 @@ dependencies:
   go_router: ^9.0.3
   google_fonts: ^5.1.0
   shimmer: ^3.0.0
+  url_launcher: ^6.1.12
 
 dev_dependencies:
   
