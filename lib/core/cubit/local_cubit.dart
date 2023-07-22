@@ -1,46 +1,45 @@
-import 'package:equatable/equatable.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/core/cubit/local_state.dart';
 import 'package:movie_app/core/theme/enum_theme.dart';
 import 'package:movie_app/core/utils/cache_helber.dart';
-import 'package:movie_app/core/utils/constant.dart';
 
-part 'app_theme_state.dart';
+class LocalCubit extends Cubit<LocalState> {
+  LocalCubit() : super(AppThemeInitial());
 
-class AppThemeCubit extends Cubit<AppThemeState> {
-  AppThemeCubit() : super(AppThemeInitial());
-
-  static AppThemeCubit get(context) => BlocProvider.of(context);
-  dynamic primaryColor = kPrimaryyColor;
-  bool isChanged = false;
+  static LocalCubit get(context) => BlocProvider.of(context);
   bool changed = true;
-  bool changedButtom = false;
+String lang = "en";
   changeTheme(ThemeState themeState) async {
-    print(themeState);
     switch (themeState) {
       case ThemeState.initial:
         if (await CacheHelber.getData(key: "theme") != null) {
           if (await CacheHelber.getData(key: "theme") == "d") {
-            emit(AppDarkTheme());
+            emit(const AppDarkTheme());
           } else {
-            emit(AppLightTheme());
+            emit(const AppLightTheme());
           }
         }
         break;
       case ThemeState.dark:
         await CacheHelber.saveData(key: "theme", value: "d");
-        isChanged = !isChanged;
+
         changed = !changed;
-        changedButtom = !changedButtom;
-        emit(AppDarkTheme());
+        emit(const AppDarkTheme());
         break;
       case ThemeState.light:
         await CacheHelber.saveData(key: "theme", value: "l");
-        isChanged = !isChanged;
-        changed = !changed;
-        changedButtom = !changedButtom;
-        emit(AppLightTheme());
+
+        emit(const AppLightTheme());
         break;
       default:
     }
+  }
+
+  
+  cahngeLan(String lan) async {
+    await CacheHelber.saveData(key: "lan", value: lan);
+    lang = lan;
+    print(lan);
   }
 }

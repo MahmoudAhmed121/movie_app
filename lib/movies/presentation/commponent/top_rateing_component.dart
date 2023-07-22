@@ -26,10 +26,10 @@ class TopRatingComponent extends StatelessWidget {
           );
         }
         if (state is TopratingSuccess) {
-          return FadeIn(
+            return FadeIn(
             duration: const Duration(milliseconds: 500),
             child: SizedBox(
-              height: 170.0,
+              height: 200.0,
               child: ListView.builder(
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
@@ -37,31 +37,55 @@ class TopRatingComponent extends StatelessWidget {
                 itemCount: state.movie.length,
                 itemBuilder: (context, index) {
                   final movie = state.movie[index];
-                  return Container(
-                    padding: const EdgeInsets.only(right: 8.0),
-                    child: InkWell(
-                      onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => MovieDetailScreen(id: movie.id),));
-                      },
-                      child: ClipRRect(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(8.0)),
-                        child: CachedNetworkImage(
-                          width: 120.0,
-                          fit: BoxFit.cover,
-                          imageUrl: ApiConstant.imageUrl(movie.backdropPath),
-                          placeholder: (context, url) => const ContainerShimmer(),
-                          errorWidget: (context, url, error) =>
-                              const Icon(Icons.error),
+                  return Column(
+                    children: [
+                      Container(
+                        height: 170,
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    MovieDetailScreen(id: movie.id),
+                              ),
+                            );
+                          },
+                          child: ClipRRect(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(8.0)),
+                            child: CachedNetworkImage(
+                              width: 120.0,
+                              fit: BoxFit.cover,
+                              imageUrl:
+                                  ApiConstant.imageUrl(movie.backdropPath),
+                              placeholder: (context, url) =>
+                                  const ContainerShimmer(),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        width: 120,
+                        child: Text(
+                          textAlign: TextAlign.center,
+                          state.movie[index].title,
+                          style: const TextStyle(
+                              fontSize: 16, overflow: TextOverflow.ellipsis),
+                        ),
+                      ),
+                    ],
                   );
                 },
               ),
             ),
-          );
-        }
+          );}
        return const ListViewLoadingShimmer();
       }
     );

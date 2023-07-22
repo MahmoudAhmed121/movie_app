@@ -2,7 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:movie_app/core/cubit/app_theme_cubit.dart';
+import 'package:movie_app/core/cubit/local_cubit.dart';
 import 'package:movie_app/core/utils/api_constant.dart';
 import 'package:movie_app/movies/domain/entities/movie_details.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -31,7 +31,7 @@ class CustomAppBar extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 12, top: 12),
             width: double.maxFinite,
             decoration: BoxDecoration(
-                color: AppThemeCubit.get(context).changed
+                color: LocalCubit.get(context).changed
                     ? const Color(0xff16122B)
                     :  const Color.fromARGB(255, 237, 237, 237),
                 borderRadius: const BorderRadius.only(
