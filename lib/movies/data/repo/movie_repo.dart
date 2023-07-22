@@ -29,9 +29,9 @@ class MovieRepo extends BaseMovieRepo {
   }
 
   @override
-  Future<Either<ServerFailure, List<Movie>>> getPopulerMovie() async {
+  Future<Either<ServerFailure, List<Movie>>> getPopulerMovie(parameter) async {
     try {
-      final response = await basemovieRemoteDataSource.getPopulerMovie();
+      final response = await basemovieRemoteDataSource.getPopulerMovie(parameter);
       return Right(response);
     } on DioError catch (e) {
       return Left(ServerFailure.fromDioError(e));
@@ -90,7 +90,7 @@ class MovieRepo extends BaseMovieRepo {
       getGenresHomePage() async {
     try {
       final response = await basemovieRemoteDataSource.getGenresHomePage();
-      return Right(response.cast<GenresHomePage>());
+      return Right(response);
     } on DioError catch (e) {
       return Left(ServerFailure.fromDioError(e));
     }

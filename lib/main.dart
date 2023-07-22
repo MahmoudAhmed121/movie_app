@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/core/cubit/app_theme_cubit.dart';
 import 'package:movie_app/core/services/services_locator.dart';
+import 'package:movie_app/core/theme/app_theme.dart';
+import 'package:movie_app/core/theme/enum_theme.dart';
+import 'package:movie_app/movies/presentation/manager/genres_home_page/genres_bloc.dart';
+import 'package:movie_app/movies/presentation/manager/genres_home_page/genres_event.dart';
 import 'package:movie_app/movies/presentation/manager/populer/populer_bloc.dart';
 import 'package:movie_app/movies/presentation/manager/populer/populer_event.dart';
 import 'package:movie_app/movies/presentation/manager/top_rating/top_rating_bloc.dart';
@@ -26,17 +31,42 @@ class MovieApp extends StatelessWidget {
             create: (context) =>
                 getIt<NowPlayingBloc>()..add(GetNowPlayingEvent())),
         BlocProvider(
-            create: (context) => getIt<PopularBloc>()..add(GetPopulerEvent())),
+            create: (context) =>
+                getIt<PopularBloc>()..add(const GetPopulerEvent(id: 80))),
         BlocProvider(
             create: (context) =>
                 getIt<TopRatingBloc>()..add(GetTopRatingEvent())),
+        BlocProvider(
+            create: (context) =>
+                getIt<GenresBloc>()..add(GetGenresHomePageEvent())),
+        BlocProvider(
+            create: (context) =>
+                getIt<AppThemeCubit>()..changeTheme(ThemeState.initial)),
       ],
-      child:  MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData.dark().copyWith(
-scaffoldBackgroundColor:  const Color(0xff16122B),
-        ),
-        home: const MainMoviesScreen(),
+      child: BlocBuilder<AppThemeCubit, AppThemeState>(
+        builder: (context, state) {
+          if (state is AppLightTheme) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              theme: CustomTheme.lightTheme(context),
+              home: const DrawerView(),
+            );
+          } else if (state is AppDarkTheme) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              theme: CustomTheme.darkTheme(context),
+              home: const DrawerView(),
+            );
+          }
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData.dark().copyWith(
+              scaffoldBackgroundColor: const Color(0xff16122B),
+              
+            ),
+            home: const DrawerView(),
+          );
+        },
       ),
     );
   }

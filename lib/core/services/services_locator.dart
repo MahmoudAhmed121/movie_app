@@ -1,14 +1,18 @@
+import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:movie_app/core/cubit/app_theme_cubit.dart';
 import 'package:movie_app/movies/data/data_source/movie_remote_data_source.dart';
 import 'package:movie_app/movies/data/repo/movie_repo.dart';
 import 'package:movie_app/movies/domain/repo/base_movies_repo.dart';
 import 'package:movie_app/movies/domain/use_case/get_cast.dart';
+import 'package:movie_app/movies/domain/use_case/get_gener_home_page.dart';
 import 'package:movie_app/movies/domain/use_case/get_movie_recommendations.dart';
 import 'package:movie_app/movies/domain/use_case/get_movies_details.dart';
 import 'package:movie_app/movies/domain/use_case/get_now_playing_movies.dart';
 import 'package:movie_app/movies/domain/use_case/get_populer_movies.dart';
 import 'package:movie_app/movies/domain/use_case/get_top_rating_movies.dart';
 import 'package:movie_app/movies/presentation/manager/cast/cast_bloc.dart';
+import 'package:movie_app/movies/presentation/manager/genres_home_page/genres_bloc.dart';
 import 'package:movie_app/movies/presentation/manager/movie_details/movies_details_bloc.dart';
 import 'package:movie_app/movies/presentation/manager/populer/populer_bloc.dart';
 import 'package:movie_app/movies/presentation/manager/recommendation/recommendation_bloc.dart';
@@ -20,12 +24,17 @@ final getIt = GetIt.instance;
 
 class ServicesLocator {
   void init() {
+
+    // AppTheme Cubit
+    getIt.registerFactory(() => AppThemeCubit()) ;
     // MovieBloc
     getIt.registerFactory(() => NowPlayingBloc(getIt()));
 
     getIt.registerFactory(() => PopularBloc(getIt()));
 
     getIt.registerFactory(() => TopRatingBloc(getIt()));
+
+    getIt.registerFactory(() => GenresBloc(getIt()));
 
     // movie details bloc
 
@@ -34,7 +43,13 @@ class ServicesLocator {
     getIt.registerFactory(() => RecommendationBloc(getIt()));
 
     getIt.registerFactory(() => CastBloc(getIt()));
+   
 
+    // Dio
+    getIt.registerFactory(() => Dio());
+
+    //use cases TopRatingUseCasMovie
+    getIt.registerLazySingleton(() => GetGenersHomePageUseCase(baseMovieRepo: getIt()));
 
     //use cases cast
     getIt.registerLazySingleton(()=> GetCastUseCase(baseMovieRepo: getIt()));

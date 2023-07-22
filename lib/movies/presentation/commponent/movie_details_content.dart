@@ -23,8 +23,9 @@ class MovieDetailContent extends StatelessWidget {
             slivers: [
               CustomAppBar(movieDetails: state.movieDetails),
               CustomTiltleMove(movieDetails: state.movieDetails),
+             const CustomMoreLikeThisMovie(title: 'Cast'),
               const CustomCastView(),
-              const CustomMoreLikeThisMovie(),
+              const CustomMoreLikeThisMovie(title: 'More like this'),
               const RecommendationsWidget(),
             ],
           );

@@ -3,7 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_app/core/utils/constant.dart';
+import 'package:movie_app/core/utils/api_constant.dart';
 import 'package:movie_app/movies/presentation/screen/movie_detail_screen.dart';
 
 
@@ -35,6 +35,7 @@ class NowPlayingComponent extends StatelessWidget {
             duration: const Duration(milliseconds: 500),
             child: CarouselSlider(
               options: CarouselOptions(
+                autoPlay: true,
                 height: 400.0,
                 viewportFraction: 1,
                 onPageChanged: (index, reason) {},

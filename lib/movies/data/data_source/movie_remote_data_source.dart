@@ -1,6 +1,7 @@
+
 import 'package:dio/dio.dart';
 import 'package:movie_app/core/services/services_locator.dart';
-import 'package:movie_app/core/utils/constant.dart';
+import 'package:movie_app/core/utils/api_constant.dart';
 import 'package:movie_app/movies/data/model/cast_model.dart';
 import 'package:movie_app/movies/data/model/genres_home_page.dart';
 import 'package:movie_app/movies/data/model/movie_details_model.dart';
@@ -9,10 +10,11 @@ import 'package:movie_app/movies/data/model/recommendations_model.dart';
 import 'package:movie_app/movies/domain/use_case/get_cast.dart';
 import 'package:movie_app/movies/domain/use_case/get_movie_recommendations.dart';
 import 'package:movie_app/movies/domain/use_case/get_movies_details.dart';
+import 'package:movie_app/movies/domain/use_case/get_populer_movies.dart';
 
 abstract class BaseMovieRemoteDataSource {
   Future<List<MovieModel>> getNowPlayingMovie();
-  Future<List<MovieModel>> getPopulerMovie();
+  Future<List<MovieModel>> getPopulerMovie(PopularPrameter prameter);
   Future<List<MovieModel>> getTopRatingMovie();
   Future<MovieDetailsModel> getMovieDetails(MovieDetailsParametrs parametrs);
   Future<List<RecommendationModel>> getRecommendations(RecommendationsParametr parametrs);
@@ -35,9 +37,9 @@ class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
   }
 
   @override
-  Future<List<MovieModel>> getPopulerMovie() async {
+  Future<List<MovieModel>> getPopulerMovie(PopularPrameter prameter) async {
     final response = await getIt<Dio>().get(
-        "${ApiConstant.domain}${ApiConstant.popular}${ApiConstant.apiKey}");
+        ApiConstant.discover(prameter.id.toString()));
 
     final List<dynamic> responseDynamic = response.data["results"];
     final List<MovieModel> responseMovieModel = responseDynamic
@@ -73,7 +75,7 @@ class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
   Future<List<RecommendationModel>> getRecommendations(
       RecommendationsParametr parametrs) async {
     final response = await getIt<Dio>().get(
-        "${ApiConstant.domain}${ApiConstant.recommendation(parametrs.id.toString())}");
+        ApiConstant.recommendation(parametrs.id.toString()));
 
     final List<dynamic> responseDynamic = response.data["results"];
 
@@ -86,7 +88,7 @@ class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
   @override
   Future<List<CastModel>> getCast(CastParametrs parametrs) async {
     final response = await getIt<Dio>().get(
-        "${ApiConstant.domain}${ApiConstant.cast(parametrs.id.toString())}");
+        ApiConstant.cast(parametrs.id.toString()));
 
     final List<dynamic> responseDynamic = response.data["cast"];
 

@@ -1,12 +1,21 @@
-class ApiConstant {
-  static const String domain = "https://api.themoviedb.org/3";
-  static const String apiKey = "?api_key=992e2fd71b1daca0c72978cd45a84073";
-  static const String baseImageUrl = "https://image.tmdb.org/t/p/w500";
-  static const String popular = "/movie/popular";
-  static const String nowPlaying = "/movie/now_playing";
-  static const String topRated = "/movie/top_rated";
-  static String recommendation(String id) =>
-      "/movie/$id/recommendations$apiKey";
-  static String cast(String id) => "/movie/$id/credits$apiKey";
-  static String imageUrl(String path) => "$baseImageUrl$path";
-}
+import 'package:flutter/material.dart';
+
+const kPrimaryColor = Color.fromARGB(255, 32, 30, 11);
+const MaterialColor kPrimaryyColor = MaterialColor(
+  _kPrimaryyColor,
+  <int, Color>{
+    50: Color(0xff100B20),
+    100: Color(0xff100B20),
+    200: Color(0xff100B20),
+    300: Color(0xff100B20),
+    400: Color(0xff100B20),
+    500: Color(_kPrimaryyColor),
+    600: Color(0xff100B20),
+    700: Color(0xff100B20),
+    800: Color(0xff100B20),
+    900: Color(0xff100B20),
+  },
+);
+const int _kPrimaryyColor = 0xff100B20;
+
+const kShadowOneColorDark = Color(0xff1e1639);

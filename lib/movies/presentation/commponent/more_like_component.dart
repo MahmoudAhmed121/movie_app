@@ -2,8 +2,8 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 
 class CustomMoreLikeThisMovie extends StatelessWidget {
-  const CustomMoreLikeThisMovie({Key? key}) : super(key: key);
-
+  const CustomMoreLikeThisMovie({Key? key, required this.title}) : super(key: key);
+final String title;
   @override
   Widget build(BuildContext context) {
     return  SliverPadding(
@@ -13,7 +13,7 @@ class CustomMoreLikeThisMovie extends StatelessWidget {
                     from: 20,
                     duration: const Duration(milliseconds: 500),
                     child: Text(
-                      'More like this'.toUpperCase(),
+                      title.toUpperCase(),
                       style: const TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.w500,

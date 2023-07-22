@@ -71,7 +71,7 @@ class CustomTiltleMove extends StatelessWidget {
                   Text(
                     _showDuration(movieDetails.runtime),
                     style: const TextStyle(
-                      color: Colors.white70,
+                     
                       fontSize: 16.0,
                       fontWeight: FontWeight.w500,
                       letterSpacing: 1.2,

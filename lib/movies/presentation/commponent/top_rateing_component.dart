@@ -2,11 +2,12 @@ import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_app/core/utils/constant.dart';
+import 'package:movie_app/core/shimmer/container_shimmer.dart';
+import 'package:movie_app/core/shimmer/list_view_loading_shimmer.dart';
+import 'package:movie_app/core/utils/api_constant.dart';
 import 'package:movie_app/movies/presentation/manager/top_rating/top_rating_bloc.dart';
 import 'package:movie_app/movies/presentation/manager/top_rating/top_rating_state.dart';
 import 'package:movie_app/movies/presentation/screen/movie_detail_screen.dart';
-import 'package:shimmer/shimmer.dart';
 
 class TopRatingComponent extends StatelessWidget {
   const TopRatingComponent({super.key});
@@ -49,18 +50,7 @@ class TopRatingComponent extends StatelessWidget {
                           width: 120.0,
                           fit: BoxFit.cover,
                           imageUrl: ApiConstant.imageUrl(movie.backdropPath),
-                          placeholder: (context, url) => Shimmer.fromColors(
-                            baseColor: Colors.grey[850]!,
-                            highlightColor: Colors.grey[800]!,
-                            child: Container(
-                              height: 170.0,
-                              width: 120.0,
-                              decoration: BoxDecoration(
-                                color: Colors.black,
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                            ),
-                          ),
+                          placeholder: (context, url) => const ContainerShimmer(),
                           errorWidget: (context, url, error) =>
                               const Icon(Icons.error),
                         ),
@@ -72,13 +62,8 @@ class TopRatingComponent extends StatelessWidget {
             ),
           );
         }
-        return const SizedBox(
-          height: 170,
-          child: Center(
-            child: CircularProgressIndicator(),
-          ),
-        );
-      },
+       return const ListViewLoadingShimmer();
+      }
     );
   }
 }
