@@ -3,6 +3,7 @@ import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:movie_app/core/cubit/local_cubit.dart';
+import 'package:movie_app/core/utils/cache_helber.dart';
 import 'package:movie_app/movies/presentation/commponent/custom_row.dart';
 
 import '../../../core/theme/enum_theme.dart';
@@ -73,7 +74,9 @@ FocusedMenuHolder barMenu(BuildContext context) {
                 color: Colors.white, size: 14),
             backgroundColor: const Color(0xff16122B),
             onPressed: () {
+               CacheHelber.saveData(key: "theme", value: true);
               LocalCubit.get(context).changeTheme(ThemeState.dark,);
+             
             }),
         FocusedMenuItem(
             title: const Text(
@@ -84,6 +87,7 @@ FocusedMenuHolder barMenu(BuildContext context) {
                 color: Color(0xff16122B), size: 14),
             backgroundColor: Colors.white,
             onPressed: () {
+               CacheHelber.saveData(key: "theme", value: false);
               LocalCubit.get(context).changeTheme(ThemeState.light,);
             }),
       ],

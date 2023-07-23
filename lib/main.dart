@@ -5,13 +5,13 @@ import 'package:movie_app/core/cubit/local_state.dart';
 import 'package:movie_app/core/services/services_locator.dart';
 import 'package:movie_app/core/theme/app_theme.dart';
 import 'package:movie_app/core/theme/enum_theme.dart';
-import 'package:movie_app/movies/presentation/commponent/drawer.dart';
 import 'package:movie_app/movies/presentation/manager/genres_home_page/genres_bloc.dart';
 import 'package:movie_app/movies/presentation/manager/genres_home_page/genres_event.dart';
 import 'package:movie_app/movies/presentation/manager/populer/populer_bloc.dart';
 import 'package:movie_app/movies/presentation/manager/populer/populer_event.dart';
 import 'package:movie_app/movies/presentation/manager/top_rating/top_rating_bloc.dart';
 import 'package:movie_app/movies/presentation/manager/top_rating/top_rating_event.dart';
+import 'package:movie_app/splach/presentation/splach_view.dart';
 
 import 'movies/presentation/manager/now_playing/now_playing_bloc.dart';
 import 'movies/presentation/manager/now_playing/now_playing_event.dart';
@@ -57,7 +57,7 @@ class MovieApp extends StatelessWidget {
                   
                   debugShowCheckedModeBanner: false,
                   theme: CustomTheme.lightTheme(context),
-                  home: const DrawerView(),
+                  home: const SplachView(),
                 );
               } else if (state is AppDarkTheme) {
                 return MaterialApp(
@@ -66,7 +66,7 @@ class MovieApp extends StatelessWidget {
                   
                   debugShowCheckedModeBanner: false,
                   theme: CustomTheme.darkTheme(context),
-                  home: const DrawerView(),
+                  home: const SplachView(),
                 );
               }
               return MaterialApp(
@@ -74,7 +74,7 @@ class MovieApp extends StatelessWidget {
                 theme: ThemeData.dark().copyWith(
                   scaffoldBackgroundColor: const Color(0xff16122B),
                 ),
-                home: const DrawerView(),
+                home: const SplachView(),
               );
             },
           );

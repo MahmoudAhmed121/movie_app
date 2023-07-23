@@ -46,6 +46,7 @@ class RecommendationsWidget extends StatelessWidget {
               },
               childCount: state.recommendationModel.length,
             ),
+            
           );
         }
         return const SliverToBoxAdapter(child: SizedBox());

@@ -1,5 +1,6 @@
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_app/movies/presentation/commponent/drawer_menu.dart';
 import 'package:movie_app/movies/presentation/screen/movies_screen.dart';
 class DrawerView extends StatefulWidget {
   const DrawerView({Key? key}) : super(key: key);

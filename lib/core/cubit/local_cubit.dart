@@ -29,7 +29,7 @@ String lang = "en";
         break;
       case ThemeState.light:
         await CacheHelber.saveData(key: "theme", value: "l");
-
+changed = !changed;
         emit(const AppLightTheme());
         break;
       default:
@@ -37,9 +37,5 @@ String lang = "en";
   }
 
   
-  cahngeLan(String lan) async {
-    await CacheHelber.saveData(key: "lan", value: lan);
-    lang = lan;
-    print(lan);
-  }
+ 
 }
