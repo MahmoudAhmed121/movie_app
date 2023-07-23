@@ -10,53 +10,52 @@ abstract class BaseLocalDataSource {
   List<Movie> getNowPlayingMovie();
   List<Movie> getDiscaverMovie();
   List<Movie> getTopRatingMovie();
-    Box<MovieDetails> getMovieDetails();
+  Box<MovieDetails> getMovieDetails();
   List<Recommendations> getRecommendations();
   List<Cast> getCast();
   List<GenresHomePage> getGenresHomePage();
 }
 
-
-class LocalDataSource extends BaseLocalDataSource{
+class LocalDataSource extends BaseLocalDataSource {
   @override
   List<Cast> getCast() {
-   var box = Hive.box<Cast>(kCastBox);
-   return box.values.toList();
+    var box = Hive.box<Cast>(kCastBox);
+    return box.values.toList();
   }
 
   @override
   List<Movie> getDiscaverMovie() {
-  var box = Hive.box<Movie>(kDiscoverBox);
-   return box.values.toList();
+    var box = Hive.box<Movie>(kDiscoverBox);
+    return box.values.toList();
   }
 
   @override
   List<GenresHomePage> getGenresHomePage() {
     var box = Hive.box<GenresHomePage>(kGenerHomeBox);
-   return box.values.toList();
+    return box.values.toList();
   }
 
-@override
-Box<MovieDetails> getMovieDetails() {
-  var box = Hive.box<MovieDetails>(kMovieDetailsBox);
-  return box;
-}
+  @override
+  Box<MovieDetails> getMovieDetails() {
+    var box = Hive.box<MovieDetails>(kMovieDetailsBox);
+    return box;
+  }
 
   @override
   List<Movie> getNowPlayingMovie() {
-    // TODO: implement getNowPlayingMovie
-    throw UnimplementedError();
+    var box = Hive.box<Movie>(kNowPlayingBox);
+    return box.values.toList();
   }
 
   @override
   List<Recommendations> getRecommendations() {
-    // TODO: implement getRecommendations
-    throw UnimplementedError();
+    var box = Hive.box<Recommendations>(kRecommendationBox);
+    return box.values.toList();
   }
 
   @override
   List<Movie> getTopRatingMovie() {
-    // TODO: implement getTopRatingMovie
-    throw UnimplementedError();
+    var box = Hive.box<Movie>(kTopRatingBox);
+    return box.values.toList();
   }
 }

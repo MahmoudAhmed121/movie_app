@@ -19,3 +19,14 @@ const MaterialColor kPrimaryyColor = MaterialColor(
 const int _kPrimaryyColor = 0xff100B20;
 
 const kShadowOneColorDark = Color(0xff1e1639);
+
+
+
+const kDiscoverBox ="discoverBox";
+const kTopRatingBox ="topRatingBox";
+const kNowPlayingBox ="nowPlayingBox";
+const kMovieDetailsBox = "movieDetailsBox";
+const kGenerHomeBox= "generHomeBox";
+const kCastBox = "castBox";
+const kRecommendationBox = "recommendationBox";
+

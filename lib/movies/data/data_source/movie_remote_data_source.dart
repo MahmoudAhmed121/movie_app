@@ -15,20 +15,26 @@ import 'package:movie_app/movies/data/model/genres_home_page.dart';
 import 'package:movie_app/movies/data/model/movie_details_model.dart';
 import 'package:movie_app/movies/data/model/movie_model.dart';
 import 'package:movie_app/movies/data/model/recommendations_model.dart';
+import 'package:movie_app/movies/domain/entities/gener_home_page.dart';
+import 'package:movie_app/movies/domain/entities/movie.dart';
+import 'package:movie_app/movies/domain/entities/movie_details.dart';
+import 'package:movie_app/movies/domain/entities/recommendations.dart';
 import 'package:movie_app/movies/domain/use_case/get_cast.dart';
 import 'package:movie_app/movies/domain/use_case/get_movie_recommendations.dart';
 import 'package:movie_app/movies/domain/use_case/get_movies_details.dart';
 import 'package:movie_app/movies/domain/use_case/get_populer_movies.dart';
 
+import '../../domain/entities/cast.dart';
+
 abstract class BaseMovieRemoteDataSource {
-  Future<List<MovieModel>> getNowPlayingMovie();
-  Future<List<MovieModel>> getDiscaverMovie(DiscoverPrameter prameter);
-  Future<List<MovieModel>> getTopRatingMovie();
-  Future<MovieDetailsModel> getMovieDetails(MovieDetailsParametrs parametrs);
-  Future<List<RecommendationModel>> getRecommendations(
+  Future<List<Movie>> getNowPlayingMovie();
+  Future<List<Movie>> getDiscaverMovie(DiscoverPrameter prameter);
+  Future<List<Movie>> getTopRatingMovie();
+  Future<MovieDetails> getMovieDetails(MovieDetailsParametrs parametrs);
+  Future<List<Recommendations>> getRecommendations(
       RecommendationsParametr parametrs);
-  Future<List<CastModel>> getCast(CastParametrs parametrs);
-  Future<List<GenerisHomePageModel>> getGenresHomePage();
+  Future<List<Cast>> getCast(CastParametrs parametrs);
+  Future<List<GenresHomePage>> getGenresHomePage();
 }
 
 class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
@@ -46,7 +52,7 @@ class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
     final List<MovieModel> responseMovieModel = responseDynamic
         .map((dataList) => MovieModel.fromjson(dataList))
         .toList();
-    nowPlayingBox(responseMovieModel, kMovieBox);
+    nowPlayingBox(responseMovieModel, kNowPlayingBox);
     return responseMovieModel;
   }
 
@@ -58,7 +64,7 @@ class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
     final List<MovieModel> responseMovieModel = responseDynamic
         .map((dataList) => MovieModel.fromjson(dataList))
         .toList();
-    discoverBox(responseMovieModel, kMovieBox);
+    discoverBox(responseMovieModel, kDiscoverBox);
     return responseMovieModel;
   }
 
@@ -71,7 +77,7 @@ class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
     final List<MovieModel> responseMovieModel = responseDynamic
         .map((dataList) => MovieModel.fromjson(dataList))
         .toList();
-    topRatingBox(responseMovieModel, kMovieBox);
+    topRatingBox(responseMovieModel, kTopRatingBox);
     return responseMovieModel;
   }
 

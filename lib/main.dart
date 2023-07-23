@@ -33,7 +33,7 @@ void main() async {
   Hive.registerAdapter(RecommendationsAdapter());
   await Hive.openBox<Movie>(kDiscoverBox);
   await Hive.openBox<Movie>(kTopRatingBox);
-  await Hive.openBox<Movie>(kGenresBox);
+  await Hive.openBox<Movie>(kNowPlayingBox);
   await Hive.openBox<MovieDetails>(kMovieDetailsBox);
   await Hive.openBox<Cast>(kCastBox);
   await Hive.openBox<GenresHomePage>(kGenerHomeBox);
