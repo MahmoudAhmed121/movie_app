@@ -20,7 +20,7 @@ class PopularBloc extends Bloc<PopulerEvent, PopulerState> {
       GetPopulerEvent event, Emitter<PopulerState> emit) async {
     emit(PopulerLoading());
 
-    final result = await getPopulerUseCasMovie(PopularPrameter(id: event.id));
+    final result = await getPopulerUseCasMovie(DiscoverPrameter(id: event.id));
 
     result.fold(
       (failure) => emit(PopulerFailure(errMessages: failure.errMessages)),

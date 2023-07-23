@@ -7,21 +7,21 @@ import 'package:movie_app/core/utils/base_use_case.dart';
 import 'package:movie_app/movies/domain/entities/movie.dart';
 import 'package:movie_app/movies/domain/repo/base_movies_repo.dart';
 
-class GetPopulerUseCasMovie extends BaseUseCase<List<Movie>, PopularPrameter> {
+class GetPopulerUseCasMovie extends BaseUseCase<List<Movie>, DiscoverPrameter> {
   BaseMovieRepo baseMovieRepo;
   GetPopulerUseCasMovie({
     required this.baseMovieRepo,
   });
 
   @override
-  Future<Either<ServerFailure, List<Movie>>> call(PopularPrameter parametrs) {
+  Future<Either<ServerFailure, List<Movie>>> call(DiscoverPrameter parametrs) {
     return baseMovieRepo.getPopulerMovie(parametrs);
   }
 }
 
-class PopularPrameter extends Equatable {
+class DiscoverPrameter extends Equatable {
   final int id;
-  const PopularPrameter({
+  const DiscoverPrameter({
     required this.id,
   });
   @override
