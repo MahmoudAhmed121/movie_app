@@ -31,11 +31,14 @@ void main() async {
   Hive.registerAdapter(GenresHomePageAdapter());
   Hive.registerAdapter(CastAdapter());
   Hive.registerAdapter(RecommendationsAdapter());
-  await Hive.openBox(kMovieBox);
-  await Hive.openBox(kMovieDetailsBox);
-  await Hive.openBox(kCastBox);
-  await Hive.openBox(kGenerHomeBox);
-  await Hive.openBox(kRecommendationBox);
+  await Hive.openBox<Movie>(kDiscoverBox);
+  await Hive.openBox<Movie>(kTopRatingBox);
+  await Hive.openBox<Movie>(kGenresBox);
+  await Hive.openBox<MovieDetails>(kMovieDetailsBox);
+  await Hive.openBox<Cast>(kCastBox);
+  await Hive.openBox<GenresHomePage>(kGenerHomeBox);
+  await Hive.openBox<Recommendations>(kRecommendationBox);
+
   runApp(const MovieApp());
 }
 
