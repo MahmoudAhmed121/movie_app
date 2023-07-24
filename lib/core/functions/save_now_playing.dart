@@ -3,6 +3,9 @@
 import 'package:movie_app/movies/domain/entities/movie.dart';
 
 void nowPlayingBox(List<Movie> responseMovieModel, String boxName) {
-    var nowPlayingBox = Hive.box(boxName);
-    nowPlayingBox.addAll(responseMovieModel);
+ 
+  var nowPlayingBox = Hive.box<Movie>(boxName);
+  nowPlayingBox.addAll(responseMovieModel);
+
+ 
   }

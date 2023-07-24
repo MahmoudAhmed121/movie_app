@@ -1,12 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
-import 'package:movie_app/core/functions/save_cast.dart';
-import 'package:movie_app/core/functions/save_discover.dart';
-import 'package:movie_app/core/functions/save_genres_home.dart';
 import 'package:movie_app/core/functions/save_movie_details.dart';
 import 'package:movie_app/core/functions/save_now_playing.dart';
-import 'package:movie_app/core/functions/save_recommendations.dart';
-import 'package:movie_app/core/functions/save_top_rating.dart';
 import 'package:movie_app/core/utils/api_constant.dart';
 import 'package:movie_app/core/utils/api_service.dart';
 import 'package:movie_app/core/utils/constant.dart';
@@ -52,7 +47,8 @@ class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
     final List<MovieModel> responseMovieModel = responseDynamic
         .map((dataList) => MovieModel.fromjson(dataList))
         .toList();
-    nowPlayingBox(responseMovieModel, kNowPlayingBox);
+
+   nowPlayingBox(responseMovieModel,kNowPlayingBox);
     return responseMovieModel;
   }
 
@@ -64,7 +60,7 @@ class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
     final List<MovieModel> responseMovieModel = responseDynamic
         .map((dataList) => MovieModel.fromjson(dataList))
         .toList();
-    discoverBox(responseMovieModel, kDiscoverBox);
+    // nowPlayingBox(responseMovieModel, kDiscoverBox);
     return responseMovieModel;
   }
 
@@ -77,7 +73,7 @@ class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
     final List<MovieModel> responseMovieModel = responseDynamic
         .map((dataList) => MovieModel.fromjson(dataList))
         .toList();
-    topRatingBox(responseMovieModel, kTopRatingBox);
+    //  nowPlayingBox(responseMovieModel, kTopRatingBox);
     return responseMovieModel;
   }
 
@@ -88,7 +84,9 @@ class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
         endpoint: "/movie/${parametrs.id}${ApiConstant.apiKey}");
 
     final data = MovieDetailsModel.fromJson(response);
+
     movieDetailsBox(data, kMovieDetailsBox);
+    
     return data;
   }
 
@@ -102,7 +100,7 @@ class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
 
     final List<RecommendationModel> responseRecommendation =
         responseDynamic.map((e) => RecommendationModel.fromJson(e)).toList();
-    recomendationBox(responseRecommendation, kRecommendationBox);
+    // recomendationBox(responseRecommendation, kRecommendationBox);
     return responseRecommendation;
   }
 
@@ -115,7 +113,7 @@ class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
 
     final List<CastModel> responseCast =
         responseDynamic.map((e) => CastModel.fromjson(e)).toList();
-    castBox(responseCast, kCastBox);
+    // castBox(responseCast, kCastBox);
     return responseCast;
   }
 
@@ -127,7 +125,7 @@ class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
     final List<dynamic> responseDynamic = response["genres"];
     final List<GenerisHomePageModel> responseGenner =
         responseDynamic.map((e) => GenerisHomePageModel.fromJson(e)).toList();
-    genresBox(responseGenner, kGenerHomeBox);
+    // genresBox(responseGenner, kGenerHomeBox);
     return responseGenner;
   }
 }

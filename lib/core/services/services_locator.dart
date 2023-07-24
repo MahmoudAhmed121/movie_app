@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:movie_app/core/cubit/local_cubit.dart';
 import 'package:movie_app/core/utils/api_service.dart';
+import 'package:movie_app/movies/data/data_source/movie_local_data_source.dart';
 import 'package:movie_app/movies/data/data_source/movie_remote_data_source.dart';
 import 'package:movie_app/movies/data/repo/movie_repo.dart';
 import 'package:movie_app/movies/domain/repo/base_movies_repo.dart';
@@ -77,9 +78,13 @@ class ServicesLocator {
 
     //Repo
     getIt.registerLazySingleton<BaseMovieRepo>(
-        () => MovieRepo(basemovieRemoteDataSource: getIt()));
+        () => MovieRepo(basemovieRemoteDataSource: getIt(),baseLocalMovieDataSource: getIt()));
+        
+    // Local Data Source
+     getIt.registerLazySingleton<BaseLocalMovieDataSource>(
+        () => LocalMovieDataSource( ));
 
-    // DataSource
+    // Remote Data Source
     getIt.registerLazySingleton<BaseMovieRemoteDataSource>(
         () => MovieRemoteDataSource(apiService: getIt()));
 

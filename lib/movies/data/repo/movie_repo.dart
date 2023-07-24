@@ -1,6 +1,9 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+
 import 'package:movie_app/core/errors/failure.dart';
+import 'package:movie_app/movies/data/data_source/movie_local_data_source.dart';
 import 'package:movie_app/movies/data/data_source/movie_remote_data_source.dart';
 import 'package:movie_app/movies/domain/entities/cast.dart';
 import 'package:movie_app/movies/domain/entities/gener_home_page.dart';
@@ -14,16 +17,23 @@ import 'package:movie_app/movies/domain/use_case/get_movies_details.dart';
 
 class MovieRepo extends BaseMovieRepo {
   BaseMovieRemoteDataSource basemovieRemoteDataSource;
+  BaseLocalMovieDataSource baseLocalMovieDataSource;
   MovieRepo({
     required this.basemovieRemoteDataSource,
+    required this.baseLocalMovieDataSource,
   });
 
   @override
   Future<Either<ServerFailure, List<Movie>>> getNowPlayingMovie() async {
     try {
+      var responseLocal = baseLocalMovieDataSource.getNowPlayingMovie();
+      if (responseLocal.isNotEmpty) {
+        print("gamed");
+        return Right(responseLocal);
+      }
       final response = await basemovieRemoteDataSource.getNowPlayingMovie();
       return Right(response);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(ServerFailure.fromDioError(e));
     }
   }
@@ -31,9 +41,10 @@ class MovieRepo extends BaseMovieRepo {
   @override
   Future<Either<ServerFailure, List<Movie>>> getPopulerMovie(parameter) async {
     try {
-      final response = await basemovieRemoteDataSource.getDiscaverMovie(parameter);
+      final response =
+          await basemovieRemoteDataSource.getDiscaverMovie(parameter);
       return Right(response);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(ServerFailure.fromDioError(e));
     }
   }
@@ -42,8 +53,9 @@ class MovieRepo extends BaseMovieRepo {
   Future<Either<ServerFailure, List<Movie>>> getTopRatingMovie() async {
     try {
       final response = await basemovieRemoteDataSource.getTopRatingMovie();
+
       return Right(response);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(ServerFailure.fromDioError(e));
     }
   }
@@ -52,10 +64,17 @@ class MovieRepo extends BaseMovieRepo {
   Future<Either<ServerFailure, MovieDetails>> getMovieDetails(
       MovieDetailsParametrs parameter) async {
     try {
+  //     var responseLocal = baseLocalMovieDataSource.getMovieDetails();
+  // print(responseLocal);
+  //     if (responseLocal!.genres.isNotEmpty) {
+  //       print("gameeeeed");
+  //       return Right(responseLocal);
+  //     }
+
       final response =
           await basemovieRemoteDataSource.getMovieDetails(parameter);
       return Right(response);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(ServerFailure.fromDioError(e));
     }
   }
@@ -68,7 +87,7 @@ class MovieRepo extends BaseMovieRepo {
           await basemovieRemoteDataSource.getRecommendations(parameter);
 
       return Right(response);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(ServerFailure.fromDioError(e));
     }
   }
@@ -80,7 +99,7 @@ class MovieRepo extends BaseMovieRepo {
       final response = await basemovieRemoteDataSource.getCast(parametrs);
 
       return Right(response);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(ServerFailure.fromDioError(e));
     }
   }
@@ -91,7 +110,7 @@ class MovieRepo extends BaseMovieRepo {
     try {
       final response = await basemovieRemoteDataSource.getGenresHomePage();
       return Right(response);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(ServerFailure.fromDioError(e));
     }
   }

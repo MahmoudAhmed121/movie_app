@@ -3,20 +3,19 @@ import 'package:movie_app/core/utils/constant.dart';
 import 'package:movie_app/movies/domain/entities/cast.dart';
 import 'package:movie_app/movies/domain/entities/gener_home_page.dart';
 import 'package:movie_app/movies/domain/entities/movie.dart';
-import 'package:movie_app/movies/domain/entities/movie_details.dart';
 import 'package:movie_app/movies/domain/entities/recommendations.dart';
 
-abstract class BaseLocalDataSource {
+abstract class BaseLocalMovieDataSource {
   List<Movie> getNowPlayingMovie();
   List<Movie> getDiscaverMovie();
   List<Movie> getTopRatingMovie();
-  Box<MovieDetails> getMovieDetails();
+//  MovieDetails?  getMovieDetails();
   List<Recommendations> getRecommendations();
   List<Cast> getCast();
   List<GenresHomePage> getGenresHomePage();
 }
 
-class LocalDataSource extends BaseLocalDataSource {
+class LocalMovieDataSource extends BaseLocalMovieDataSource {
   @override
   List<Cast> getCast() {
     var box = Hive.box<Cast>(kCastBox);
@@ -35,11 +34,12 @@ class LocalDataSource extends BaseLocalDataSource {
     return box.values.toList();
   }
 
-  @override
-  Box<MovieDetails> getMovieDetails() {
-    var box = Hive.box<MovieDetails>(kMovieDetailsBox);
-    return box;
-  }
+// @override
+// MovieDetails getMovieDetails() {
+//   var box = Hive.box<MovieDetails>(kMovieDetailsBox);
+  
+//   return box.get(kMovieDetailsBox);
+// }
 
   @override
   List<Movie> getNowPlayingMovie() {
