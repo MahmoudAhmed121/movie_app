@@ -60,7 +60,7 @@ class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
     final List<MovieModel> responseMovieModel = responseDynamic
         .map((dataList) => MovieModel.fromjson(dataList))
         .toList();
-    // nowPlayingBox(responseMovieModel, kDiscoverBox);
+    nowPlayingBox(responseMovieModel, kDiscoverBox);
     return responseMovieModel;
   }
 
@@ -77,18 +77,17 @@ class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
     return responseMovieModel;
   }
 
-  @override
-  Future<MovieDetailsModel> getMovieDetails(
-      MovieDetailsParametrs parametrs) async {
-    final response = await apiService.get(
-        endpoint: "/movie/${parametrs.id}${ApiConstant.apiKey}");
+@override
+Future<MovieDetails> getMovieDetails(MovieDetailsParametrs parametrs) async {
+  final response = await apiService.get(
+      endpoint: "/movie/${parametrs.id}${ApiConstant.apiKey}");
 
-    final data = MovieDetailsModel.fromJson(response);
+  final data = MovieDetailsModel.fromJson(response);
 
-    movieDetailsBox(data, kMovieDetailsBox);
-    
-    return data;
-  }
+  movieDetailsBox(data, kMovieDetailsBox);
+
+  return data;
+}
 
   @override
   Future<List<RecommendationModel>> getRecommendations(

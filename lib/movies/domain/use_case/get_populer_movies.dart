@@ -15,7 +15,7 @@ class GetPopulerUseCasMovie extends BaseUseCase<List<Movie>, DiscoverPrameter> {
 
   @override
   Future<Either<ServerFailure, List<Movie>>> call(DiscoverPrameter parametrs) {
-    return baseMovieRepo.getPopulerMovie(parametrs);
+    return baseMovieRepo.getDiscoverMovie(parametrs);
   }
 }
 

@@ -12,10 +12,15 @@ import 'package:movie_app/movies/domain/use_case/get_populer_movies.dart';
 
 abstract class BaseMovieRepo {
   Future<Either<ServerFailure, List<Movie>>> getNowPlayingMovie();
-  Future<Either<ServerFailure, List<Movie>>> getPopulerMovie(DiscoverPrameter prameter);
+  Future<Either<ServerFailure, List<Movie>>> getDiscoverMovie(DiscoverPrameter prameter);
   Future<Either<ServerFailure, List<Movie>>> getTopRatingMovie();
   Future<Either<ServerFailure, MovieDetails>> getMovieDetails(MovieDetailsParametrs parameter);
    Future<Either<ServerFailure, List<Recommendations>>> getRecommendations(RecommendationsParametr parameter);
    Future<Either<ServerFailure, List<Cast>>> getCast(CastParametrs parametrs);
    Future<Either<ServerFailure, List<GenresHomePage>>> getGenresHomePage();
+
+void takeServerFailure(String error);
+    
+ 
+   
 }

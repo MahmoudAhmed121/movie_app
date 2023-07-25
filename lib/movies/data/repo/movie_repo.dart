@@ -14,6 +14,10 @@ import 'package:movie_app/movies/domain/repo/base_movies_repo.dart';
 import 'package:movie_app/movies/domain/use_case/get_cast.dart';
 import 'package:movie_app/movies/domain/use_case/get_movie_recommendations.dart';
 import 'package:movie_app/movies/domain/use_case/get_movies_details.dart';
+import 'package:movie_app/movies/domain/use_case/get_populer_movies.dart';
+
+String errorMessage = "";
+
 
 class MovieRepo extends BaseMovieRepo {
   BaseMovieRemoteDataSource basemovieRemoteDataSource;
@@ -28,24 +32,31 @@ class MovieRepo extends BaseMovieRepo {
     try {
       var responseLocal = baseLocalMovieDataSource.getNowPlayingMovie();
       if (responseLocal.isNotEmpty) {
-        print("gamed");
         return Right(responseLocal);
       }
       final response = await basemovieRemoteDataSource.getNowPlayingMovie();
-      return Right(response);
+      return right(response);
     } on DioException catch (e) {
-      return Left(ServerFailure.fromDioError(e));
+      return left(ServerFailure.fromDioError(e));
     }
   }
 
   @override
-  Future<Either<ServerFailure, List<Movie>>> getPopulerMovie(parameter) async {
+  Future<Either<ServerFailure, List<Movie>>> getDiscoverMovie(
+      DiscoverPrameter parameter) async {
     try {
       final response =
           await basemovieRemoteDataSource.getDiscaverMovie(parameter);
-      return Right(response);
+
+      return right(response);
     } on DioException catch (e) {
-      return Left(ServerFailure.fromDioError(e));
+      final responseLocal = baseLocalMovieDataSource.getDiscaverMovie();
+      if (responseLocal.isNotEmpty) {
+        takeServerFailure(ServerFailure.fromDioError(e).errMessages);
+
+        return right(responseLocal);
+      }
+      return left(ServerFailure.fromDioError(e));
     }
   }
 
@@ -54,9 +65,9 @@ class MovieRepo extends BaseMovieRepo {
     try {
       final response = await basemovieRemoteDataSource.getTopRatingMovie();
 
-      return Right(response);
+      return right(response);
     } on DioException catch (e) {
-      return Left(ServerFailure.fromDioError(e));
+      return left(ServerFailure.fromDioError(e));
     }
   }
 
@@ -64,18 +75,18 @@ class MovieRepo extends BaseMovieRepo {
   Future<Either<ServerFailure, MovieDetails>> getMovieDetails(
       MovieDetailsParametrs parameter) async {
     try {
-  //     var responseLocal = baseLocalMovieDataSource.getMovieDetails();
-  // print(responseLocal);
-  //     if (responseLocal!.genres.isNotEmpty) {
-  //       print("gameeeeed");
-  //       return Right(responseLocal);
-  //     }
-
       final response =
           await basemovieRemoteDataSource.getMovieDetails(parameter);
-      return Right(response);
+     
+
+      return right(response);
     } on DioException catch (e) {
-      return Left(ServerFailure.fromDioError(e));
+      var responseLocal = baseLocalMovieDataSource.getMovieDetails();
+
+      if (responseLocal.genres.isNotEmpty) {
+        return right(responseLocal);
+      }
+      return left(ServerFailure.fromDioError(e));
     }
   }
 
@@ -86,9 +97,9 @@ class MovieRepo extends BaseMovieRepo {
       final response =
           await basemovieRemoteDataSource.getRecommendations(parameter);
 
-      return Right(response);
+      return right(response);
     } on DioException catch (e) {
-      return Left(ServerFailure.fromDioError(e));
+      return left(ServerFailure.fromDioError(e));
     }
   }
 
@@ -98,9 +109,9 @@ class MovieRepo extends BaseMovieRepo {
     try {
       final response = await basemovieRemoteDataSource.getCast(parametrs);
 
-      return Right(response);
+      return right(response);
     } on DioException catch (e) {
-      return Left(ServerFailure.fromDioError(e));
+      return left(ServerFailure.fromDioError(e));
     }
   }
 
@@ -109,9 +120,16 @@ class MovieRepo extends BaseMovieRepo {
       getGenresHomePage() async {
     try {
       final response = await basemovieRemoteDataSource.getGenresHomePage();
-      return Right(response);
+      return right(response);
     } on DioException catch (e) {
-      return Left(ServerFailure.fromDioError(e));
+      return left(ServerFailure.fromDioError(e));
     }
   }
+
+  @override
+  void takeServerFailure(String error) {
+    errorMessage = error;
+  }
+
+
 }

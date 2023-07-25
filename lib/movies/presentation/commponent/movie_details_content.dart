@@ -15,7 +15,9 @@ class MovieDetailContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MoviesDetailsBloc, MoviesDetailsState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+      
+      },
       builder: (context, state) {
         if (state is MoviesDetailsSuccess) {
           return CustomScrollView(

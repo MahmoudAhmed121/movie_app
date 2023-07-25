@@ -17,19 +17,17 @@ class MoviesDetailsLoading extends MoviesDetailsState {}
 
 class MoviesDetailsSuccess extends MoviesDetailsState {
   final MovieDetails movieDetails;
+
   const MoviesDetailsSuccess({
     required this.movieDetails,
+
   });
 
   
+  @override
+  List<Object> get props => [movieDetails];
 
-  MoviesDetailsSuccess copyWith({
-    MovieDetails? movieDetails,
-  }) {
-    return MoviesDetailsSuccess(
-      movieDetails: movieDetails ?? this.movieDetails,
-    );
-  }
+ 
 }
 
 class MoviesDetailsFailure extends MoviesDetailsState {
@@ -38,11 +36,7 @@ class MoviesDetailsFailure extends MoviesDetailsState {
     required this.errorMessage,
   });
 
-  MoviesDetailsFailure copyWith({
-    String? errorMessage,
-  }) {
-    return MoviesDetailsFailure(
-      errorMessage: errorMessage ?? this.errorMessage,
-    );
-  }
+  
+  @override
+  List<Object> get props => [errorMessage];
 }

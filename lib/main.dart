@@ -7,6 +7,7 @@ import 'package:movie_app/core/services/services_locator.dart';
 import 'package:movie_app/core/theme/app_theme.dart';
 import 'package:movie_app/core/theme/enum_theme.dart';
 import 'package:movie_app/core/utils/constant.dart';
+import 'package:movie_app/movies/domain/entities/genres.dart';
 import 'package:movie_app/movies/domain/entities/movie.dart';
 import 'package:movie_app/movies/domain/entities/movie_details.dart';
 import 'package:movie_app/movies/presentation/manager/genres_home_page/genres_bloc.dart';
@@ -21,22 +22,14 @@ import 'movies/presentation/manager/now_playing/now_playing_bloc.dart';
 import 'movies/presentation/manager/now_playing/now_playing_event.dart';
 
 void main() async {
-  ServicesLocator().init();
-  await Hive.initFlutter();
-  Hive.registerAdapter(MovieAdapter());
-  Hive.registerAdapter(MovieDetailsAdapter());
- await Hive.openBox<Movie>(kNowPlayingBox);
- await Hive.openBox<MovieDetails>(kMovieDetailsBox);
-  // Hive.registerAdapter(GenresHomePageAdapter());
-  // Hive.registerAdapter(CastAdapter());
-  // Hive.registerAdapter(RecommendationsAdapter());
-  // await Hive.openBox(kDiscoverBox);
-  // await Hive.openBox(kTopRatingBox);
-  // await Hive.openBox(kNowPlayingBox);
-  // await Hive.openBox(kMovieDetailsBox);
-  // await Hive.openBox(kCastBox);
-  // await Hive.openBox(kGenerHomeBox);
-  // await Hive.openBox(kRecommendationBox);
+ ServicesLocator().init();
+await Hive.initFlutter();
+Hive.registerAdapter(MovieAdapter());
+Hive.registerAdapter(MovieDetailsAdapter());
+Hive.registerAdapter(GenresAdapter());
+await Hive.openBox<Movie>(kNowPlayingBox);
+await Hive.openBox<Movie>(kDiscoverBox);
+await Hive.openBox<MovieDetails>(kMovieDetailsBox);
 
   runApp(const MovieApp());
 }
@@ -53,7 +46,7 @@ class MovieApp extends StatelessWidget {
                 getIt<NowPlayingBloc>()..add(GetNowPlayingEvent())),
         BlocProvider(
             create: (context) =>
-                getIt<PopularBloc>()..add(const GetPopulerEvent(id: 80))),
+                getIt<PopularBloc>()..add(  const GetPopulerEvent(id: 80))),
         BlocProvider(
             create: (context) =>
                 getIt<TopRatingBloc>()..add(GetTopRatingEvent())),

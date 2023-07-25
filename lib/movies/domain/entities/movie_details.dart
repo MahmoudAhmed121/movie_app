@@ -4,7 +4,7 @@ import 'package:movie_app/movies/domain/entities/genres.dart';
 
 part 'movie_details.g.dart';
 
-@HiveType(typeId: 0)
+@HiveType(typeId: 1)
 class MovieDetails extends Equatable {
   @HiveField(0)
   final String homePage;

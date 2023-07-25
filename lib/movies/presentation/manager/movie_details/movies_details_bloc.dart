@@ -22,8 +22,8 @@ class MoviesDetailsBloc extends Bloc<MoviesDetailsEvent, MoviesDetailsState> {
         await getMovieDetailsUseCase(MovieDetailsParametrs(id: event.id));
 
     result.fold(
-      (failure) => emit( MoviesDetailsFailure(errorMessage: failure.errMessages)),
-         
+      (failure) =>
+          emit(MoviesDetailsFailure(errorMessage: failure.errMessages)),
       (movieDetails) => emit(
         MoviesDetailsSuccess(movieDetails: movieDetails),
       ),

@@ -31,7 +31,7 @@ class ServicesLocator {
     // MovieBloc
     getIt.registerFactory(() => NowPlayingBloc(getIt()));
 
-    getIt.registerFactory(() => PopularBloc(getIt()));
+    getIt.registerFactory(() => PopularBloc(getIt(),));
 
     getIt.registerFactory(() => TopRatingBloc(getIt()));
 

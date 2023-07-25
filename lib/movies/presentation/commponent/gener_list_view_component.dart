@@ -38,7 +38,7 @@ class _CustomGenersListViewState extends State<CustomGenersListView> {
                       setState(() {
                         selectGeners = state.generHomePage[index].id;
                         context.read<PopularBloc>().add(
-                            GetPopulerEvent(id: state.generHomePage[index].id));
+                            GetPopulerEvent(id: state.generHomePage[index].id, ));
                       });
                     },
                     text: state.generHomePage[index].name,

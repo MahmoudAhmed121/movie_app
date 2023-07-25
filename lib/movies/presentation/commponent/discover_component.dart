@@ -15,7 +15,24 @@ class DiscoverComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<PopularBloc, PopulerState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+         if (state is PopulerSuccess) {
+          print("3 ${state.errorMessage}");
+
+          if (state.errorMessage != "") {
+            ScaffoldMessenger.of(context).showSnackBar(
+               SnackBar(
+                backgroundColor: const Color.fromARGB(255, 124, 116, 116),
+                content: Text(
+               state.errorMessage,
+                  style: const TextStyle(color: Colors.black),
+                ),
+              ),
+            );
+          }
+        }
+    
+      },
       builder: (context, state) {
         if (state is PopulerFailure) {
           return Text(
