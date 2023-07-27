@@ -1,7 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
+import 'package:movie_app/core/functions/save_genres_home.dart';
 import 'package:movie_app/core/functions/save_movie_details.dart';
 import 'package:movie_app/core/functions/save_now_playing.dart';
+import 'package:movie_app/core/functions/save_recommendations.dart';
 import 'package:movie_app/core/utils/api_constant.dart';
 import 'package:movie_app/core/utils/api_service.dart';
 import 'package:movie_app/core/utils/constant.dart';
@@ -73,7 +75,7 @@ class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
     final List<MovieModel> responseMovieModel = responseDynamic
         .map((dataList) => MovieModel.fromjson(dataList))
         .toList();
-    //  nowPlayingBox(responseMovieModel, kTopRatingBox);
+     nowPlayingBox(responseMovieModel, kTopRatingBox);
     return responseMovieModel;
   }
 
@@ -99,7 +101,7 @@ Future<MovieDetails> getMovieDetails(MovieDetailsParametrs parametrs) async {
 
     final List<RecommendationModel> responseRecommendation =
         responseDynamic.map((e) => RecommendationModel.fromJson(e)).toList();
-    // recomendationBox(responseRecommendation, kRecommendationBox);
+    recomendationBox(responseRecommendation, kRecommendationBox);
     return responseRecommendation;
   }
 
@@ -112,7 +114,7 @@ Future<MovieDetails> getMovieDetails(MovieDetailsParametrs parametrs) async {
 
     final List<CastModel> responseCast =
         responseDynamic.map((e) => CastModel.fromjson(e)).toList();
-    // castBox(responseCast, kCastBox);
+
     return responseCast;
   }
 
@@ -124,7 +126,7 @@ Future<MovieDetails> getMovieDetails(MovieDetailsParametrs parametrs) async {
     final List<dynamic> responseDynamic = response["genres"];
     final List<GenerisHomePageModel> responseGenner =
         responseDynamic.map((e) => GenerisHomePageModel.fromJson(e)).toList();
-    // genresBox(responseGenner, kGenerHomeBox);
+    genresBox(responseGenner, kGenerHomeBox);
     return responseGenner;
   }
 }

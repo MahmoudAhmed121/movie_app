@@ -18,7 +18,6 @@ import 'package:movie_app/movies/domain/use_case/get_populer_movies.dart';
 
 String errorMessage = "";
 
-
 class MovieRepo extends BaseMovieRepo {
   BaseMovieRemoteDataSource basemovieRemoteDataSource;
   BaseLocalMovieDataSource baseLocalMovieDataSource;
@@ -63,6 +62,11 @@ class MovieRepo extends BaseMovieRepo {
   @override
   Future<Either<ServerFailure, List<Movie>>> getTopRatingMovie() async {
     try {
+      var responseLocal = baseLocalMovieDataSource.getTopRatingMovie();
+
+      if (responseLocal.isNotEmpty) {
+        return right(responseLocal);
+      }
       final response = await basemovieRemoteDataSource.getTopRatingMovie();
 
       return right(response);
@@ -77,7 +81,6 @@ class MovieRepo extends BaseMovieRepo {
     try {
       final response =
           await basemovieRemoteDataSource.getMovieDetails(parameter);
-     
 
       return right(response);
     } on DioException catch (e) {
@@ -99,6 +102,11 @@ class MovieRepo extends BaseMovieRepo {
 
       return right(response);
     } on DioException catch (e) {
+      var responseLocal = baseLocalMovieDataSource.getRecommendations();
+
+      if (responseLocal.isNotEmpty) {
+        return right(responseLocal);
+      }
       return left(ServerFailure.fromDioError(e));
     }
   }
@@ -119,6 +127,12 @@ class MovieRepo extends BaseMovieRepo {
   Future<Either<ServerFailure, List<GenresHomePage>>>
       getGenresHomePage() async {
     try {
+
+      var responseLocal = baseLocalMovieDataSource.getGenresHomePage();
+
+      if(responseLocal.isNotEmpty){
+        return right(responseLocal);
+      }
       final response = await basemovieRemoteDataSource.getGenresHomePage();
       return right(response);
     } on DioException catch (e) {
@@ -130,6 +144,4 @@ class MovieRepo extends BaseMovieRepo {
   void takeServerFailure(String error) {
     errorMessage = error;
   }
-
-
 }

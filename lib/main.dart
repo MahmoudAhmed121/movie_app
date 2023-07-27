@@ -7,9 +7,11 @@ import 'package:movie_app/core/services/services_locator.dart';
 import 'package:movie_app/core/theme/app_theme.dart';
 import 'package:movie_app/core/theme/enum_theme.dart';
 import 'package:movie_app/core/utils/constant.dart';
+import 'package:movie_app/movies/domain/entities/gener_home_page.dart';
 import 'package:movie_app/movies/domain/entities/genres.dart';
 import 'package:movie_app/movies/domain/entities/movie.dart';
 import 'package:movie_app/movies/domain/entities/movie_details.dart';
+import 'package:movie_app/movies/domain/entities/recommendations.dart';
 import 'package:movie_app/movies/presentation/manager/genres_home_page/genres_bloc.dart';
 import 'package:movie_app/movies/presentation/manager/genres_home_page/genres_event.dart';
 import 'package:movie_app/movies/presentation/manager/populer/populer_bloc.dart';
@@ -27,9 +29,14 @@ await Hive.initFlutter();
 Hive.registerAdapter(MovieAdapter());
 Hive.registerAdapter(MovieDetailsAdapter());
 Hive.registerAdapter(GenresAdapter());
+Hive.registerAdapter(RecommendationsAdapter());
+Hive.registerAdapter(GenresHomePageAdapter());
 await Hive.openBox<Movie>(kNowPlayingBox);
 await Hive.openBox<Movie>(kDiscoverBox);
+await Hive.openBox<Movie>(kTopRatingBox);
 await Hive.openBox<MovieDetails>(kMovieDetailsBox);
+await Hive.openBox<Recommendations>(kRecommendationBox);
+await Hive.openBox<GenresHomePage>(kGenerHomeBox);
 
   runApp(const MovieApp());
 }
